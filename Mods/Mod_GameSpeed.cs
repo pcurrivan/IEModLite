@@ -19,7 +19,7 @@ public class Mod_GameSpeed : TimeController
     }
     public void ToggleFastNew()
     {
-        if (((GameInput.GetControlkey() || Input.GetKey(KeyCode.RightCommand) || Input.GetKey(KeyCode.LeftCommand)) || Input.GetKey(KeyCode.RightCommand) || Input.GetKey(KeyCode.LeftCommand)))
+        if ((GameInput.GetControlkey() || Input.GetKey(KeyCode.RightCommand) || Input.GetKey(KeyCode.LeftCommand)))
         {
             if (GameInput.GetShiftkey())
             {
