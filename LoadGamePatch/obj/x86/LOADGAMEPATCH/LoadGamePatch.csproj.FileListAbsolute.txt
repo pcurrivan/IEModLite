@@ -1,0 +1,7 @@
+E:\SourceTree\poe-modding-framework\bin\LOADGAMEPATCH\LoadGamePatch.exe.config
+E:\SourceTree\poe-modding-framework-minimal\bin\LOADGAMEPATCH\LoadGamePatch.exe.config
+E:\SourceTree\poe-modding-framework-minimal\LoadGamePatch\obj\x86\LOADGAMEPATCH\LoadGamePatch.csprojResolveAssemblyReference.cache
+E:\SourceTree\poe-modding-framework-minimal\bin\LOADGAMEPATCH\LoadGamePatch.exe
+E:\SourceTree\poe-modding-framework-minimal\bin\LOADGAMEPATCH\LoadGamePatch.pdb
+E:\SourceTree\poe-modding-framework-minimal\LoadGamePatch\obj\x86\LOADGAMEPATCH\LoadGamePatch.exe
+E:\SourceTree\poe-modding-framework-minimal\LoadGamePatch\obj\x86\LOADGAMEPATCH\LoadGamePatch.pdb

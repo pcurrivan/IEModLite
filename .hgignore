@@ -1,0 +1,9 @@
+obj/
+bin/
+packages/
+publish/
+PEfirst.v12.suo
+poe-assemblies
+poe-assembly-public
+syntax: glob
+Mods - Copy/
