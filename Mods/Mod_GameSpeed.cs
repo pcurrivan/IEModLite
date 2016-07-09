@@ -19,7 +19,7 @@ public class Mod_GameSpeed : TimeController
     }
     public void ToggleFastNew()
     {
-        if (GameInput.GetControlkey())
+        if (((GameInput.GetControlkey() || Input.GetKey(KeyCode.RightCommand) || Input.GetKey(KeyCode.LeftCommand)) || Input.GetKey(KeyCode.RightCommand) || Input.GetKey(KeyCode.LeftCommand)))
         {
             if (GameInput.GetShiftkey())
             {
@@ -41,7 +41,7 @@ public class Mod_GameSpeed : TimeController
                 this.UpdateTimeScale();
             }
         }
-        else if (!GameInput.GetControlkey()) //default behavior is that ctrl+d does not trigger fast mode toggle
+        else if (!(GameInput.GetControlkey() || Input.GetKey(KeyCode.RightCommand) || Input.GetKey(KeyCode.LeftCommand))) //default behavior is that ctrl+d does not trigger fast mode toggle
         {
             if (this.TimeScale == this.FastTime)
             {
@@ -57,7 +57,7 @@ public class Mod_GameSpeed : TimeController
     }
     public void ToggleSlowNew()
     {
-        if (GameInput.GetControlkey())
+        if ((GameInput.GetControlkey() || Input.GetKey(KeyCode.RightCommand) || Input.GetKey(KeyCode.LeftCommand)))
         {
             if (this.TimeScale == 0.16f)
             {
@@ -69,7 +69,7 @@ public class Mod_GameSpeed : TimeController
             }
             this.UpdateTimeScale();
         }
-        else if (!GameInput.GetControlkey())
+        else if (!(GameInput.GetControlkey() || Input.GetKey(KeyCode.RightCommand) || Input.GetKey(KeyCode.LeftCommand)))
         {
             if (this.TimeScale == this.SlowTime)
             {
