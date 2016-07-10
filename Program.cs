@@ -88,7 +88,7 @@ class MainClass
 
 
         //Personal mods:
-        /*
+        
         //Increase max camping supplies to 6 on PotD
         Log("Patching CampingSupplies Mod");  //CampingSupplies
         Mod_MaxCampingSupplies.main();
@@ -100,7 +100,7 @@ class MainClass
         //Unlimited Attribute points
         Log("Patching Attribute Mod");
         Mod_Attributes.main();
-        */
+        
 #if LOADGAMEPATCH
         CecilImporter.WriteFilePatches();
 #else
