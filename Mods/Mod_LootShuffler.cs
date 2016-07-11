@@ -36,11 +36,22 @@ public class Mod_LootShuffler_LootList : LootList
     public static void patch()
     {
         CecilImporter.PatchExistingMethod(typeof(Mod_LootShuffler_LootList), "LootList", "Evaluate", "EvaluateNew");
+        CecilImporter.InjectMethodIntoType("LootList", "OnItemAcceptDialogEnd", "Private");
     }
 
-    //adding console output to understand how it works
+    private void OnItemAcceptDialogEnd(UIMessageBox.Result result, UIMessageBox sender)
+    {
+        sender.OnDialogEnd = (UIMessageBox.OnEndDialog)System.Delegate.Remove(sender.OnDialogEnd, new UIMessageBox.OnEndDialog(this.OnItemAcceptDialogEnd));
+        if (result == UIMessageBox.Result.AFFIRMATIVE)
+        {
+            Console.AddMessage("You accepted... some item!");
+        }
+    }
+
     public object[] EvaluateNew()
     {
+        UIConsole.Instance.MaxEntries = 1000; //added this
+
         ArrayList arrayList = new ArrayList();
         int num = this.TotalWeight;
 
@@ -55,10 +66,26 @@ public class Mod_LootShuffler_LootList : LootList
             if (!this.items[i].Always) //item is randomly included or not
             {
                 num += this.items[i].Weight;
+
                 if (num2 < num && !flag)
                 {
-                    flag2 = true; //select this high quality item
-                    flag = true; //you don't get any other high quality items
+                    if (!(this.items[i].Item == null) && !(this.items[i].Item is global::LootList))
+                    {
+                        /*UIWindowManager.ShowMessageBox(UIMessageBox.ButtonStyle.YESNO, "Accept Item?", this.items[i].Item.name).OnDialogEnd = delegate(UIMessageBox.Result result, UIMessageBox boxsend)
+                        {
+                            if (result == UIMessageBox.Result.AFFIRMATIVE)
+                            {
+                                Scripts.GiveItem(this.items[i].Item.name, 1);
+                                flag = true;
+                            }
+                        };*/
+                        //UIMessageBox msgBox = UIWindowManager.ShowMessageBox(UIMessageBox.ButtonStyle.YESNO, "Accept Item?", this.items[i].Item.name);
+                        //msgBox.OnDialogEnd = (UIMessageBox.OnEndDialog)System.Delegate.Combine(msgBox.OnDialogEnd, new UIMessageBox.OnEndDialog(this.OnItemAcceptDialogEnd));
+                        //this.QuitButton.onClick = (UIEventListener.VoidDelegate)Delegate.Combine(this.QuitButton.onClick, new UIEventListener.VoidDelegate(this.OnQuitClicked));
+                    }
+
+                    //flag2 = true; //select this high quality item
+                    //flag = true; //you don't get any other high quality items
                 }
             }
 
@@ -68,26 +95,27 @@ public class Mod_LootShuffler_LootList : LootList
             }
             if (!(this.items[i].Item == null))
             {
-                if (!(this.items[i].Item is global::LootList))
+                //print all item codes to console
+                for (int j = 0; j < this.items[i].Count; j++)
                 {
-                    Console.AddMessage(this.items[i].Item.name);
+                    if (this.items[i].Item is global::LootList)
+                    {
+                        Console.AddMessage("--------(BEGIN lootlist): " + this.items[i].Item.name);
+                        object[] arr = (this.items[i].Item as global::LootList).Evaluate();
+                        foreach (object o in arr)
+                            Console.AddMessage("  in lootlist: " + (o as Object).name);
+                        Console.AddMessage("--------(END lootlist)");
+                    }
+                    else
+                    {
+                        Console.AddMessage("item: " + this.items[i].Item.name);
+                    }
                 }
 
-                //UIMessageBox uIMessageBox = UIWindowManager.ShowMessageBox(UIMessageBox.ButtonStyle.YESNO, "Accept item?", GUIUtils.Format(417, new object[]
-				//{
-				//	CharacterStats.Name(UIGrimoireManager.Instance.SelectedCharacter.get_gameObject()),
-				//	GenericAbility.Name(componentInParent.Spell)
-				//}));
-
-                //global::Scripts.LogItemGet(this.items[i].Item as Item, 1, false);
-                //Console.AddMessage("  LootItem's item is not null");
-
-                //add all items?
                 //flag2 = true;
 
                 if (flag2)
                 {
-                    //Console.AddMessage("  flag2 is true");
                     for (int j = 0; j < this.items[i].Count; j++)
                     {
                         if (this.items[i].Item is global::LootList)
@@ -100,11 +128,11 @@ public class Mod_LootShuffler_LootList : LootList
                         }
                     }
                 }
-                
-                //Console.AddMessage("skipping: " + this.items[i].Item. + "(" + this.items[i].Item.name + ")");
             }
         }
-        //Console.AddMessage("End EvaluateNew\n");
+
+        
+
         return arrayList.ToArray();
     }
 }
