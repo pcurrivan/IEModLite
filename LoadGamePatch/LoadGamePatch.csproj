@@ -99,8 +99,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Program.cs" />
+    <Compile Include="Mod_Attributes.cs" />
     <Compile Include="Mod_GameSpeed.cs" />
     <Compile Include="Mod_LootShuffler.cs" />
+    <Compile Include="Mod_MaxCampingSupplies.cs" />
+    <Compile Include="Mod_PotDStatBonus.cs" />
+    <Compile Include="Mod_Recitation.cs" />
     <Compile Include="Mod_VersionNumber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\CecilImporter.cs" />

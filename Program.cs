@@ -13,7 +13,7 @@ class MainClass
 {
 	public static ModuleDefinition mainMod;
 
-    public const string GAME_VERSION = "3.0.2.1008";
+    public const string GAME_VERSION = "3.0.3.1047";
     public const string ROOT_FOLDER = @"..\..\";
     public const string SOURCE_ROOT = ROOT_FOLDER + @"poe-assemblies\" + GAME_VERSION + @"\";
     public const string ASSEMBLY = "Assembly-CSharp.dll";
@@ -77,27 +77,32 @@ class MainClass
         mainMod.Types.FirstOrDefault(x => x.Name == "UIMapTooltip").Events.FirstOrDefault(x => x.Name == "OnSelectedCharacterChanged").Name = "OnSelectedCharacterChangedEvent";
         mainMod.Types.FirstOrDefault(x => x.Name == "AIController").Methods.FirstOrDefault(x => x.Name == "AddEngagedBy").IsPublic = true;
 
+        //UIVersionNumber.Ctor
         Log("Patching Version Number Mod"); //UIVersionNumber
         Mod_VersionNumber.main();
 
+        //TimeController.ToggleFast/ToggleSlow/Update
         Log("Patching GameSpeed Mod");  //TimeController
         Mod_GameSpeed.main();
 
+        //Loot.SetSeed
         Log("Patching LootShuffler Mod");  //Loot
         Mod_LootShuffler.main();
-
 
         //Personal mods:
         
         //Increase max camping supplies to 6 on PotD
+        //CampingSupplies.StackMaximum
         Log("Patching CampingSupplies Mod");  //CampingSupplies
         Mod_MaxCampingSupplies.main();
 
         //Modify enemy stat bonus on PotD
+        //CharacterStats.DifficultyStatBonus
         Log("Patching PotD Stat Bonus Mod"); 
         Mod_PotDStatBonus.main();
 
         //Unlimited Attribute points
+        //UICharacterCreationAttributeSetter.IncAllowed
         Log("Patching Attribute Mod");
         Mod_Attributes.main();
         

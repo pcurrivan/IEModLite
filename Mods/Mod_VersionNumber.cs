@@ -19,7 +19,7 @@ public class Mod_VersionNumber : UIVersionNumber
 	public void CtorNew()
 	{
         this.FormatString = "v{0}.{1}.{2} {3}";
-        this.FormatString += " - IEModLite 1.0.0";
+        this.FormatString += " - IEModLite 1.1.0";
 		this.m_stringBuilder = new StringBuilder();
 	}
 }

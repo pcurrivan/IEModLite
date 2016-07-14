@@ -26,7 +26,7 @@ public class Mod_PotDStatBonus : CharacterStats
         {
             if (GameState.Instance && GameState.Instance.IsDifficultyPotd && !this.IsPartyMember)
             {
-                return 25f;
+                return 35f;
             }
             return 0f;
         }

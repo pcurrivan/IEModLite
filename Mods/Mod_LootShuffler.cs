@@ -14,7 +14,7 @@ public class Mod_LootShuffler
     public static void main()
     {
         Mod_LootShuffler_Loot.patch();
-        Mod_LootShuffler_LootList.patch();
+        //Mod_LootShuffler_LootList.patch();
         //Mod_LootShuffler_Container.patch();
     }
 }
@@ -36,17 +36,17 @@ public class Mod_LootShuffler_LootList : LootList
     public static void patch()
     {
         CecilImporter.PatchExistingMethod(typeof(Mod_LootShuffler_LootList), "LootList", "Evaluate", "EvaluateNew");
-        CecilImporter.InjectMethodIntoType("LootList", "OnItemAcceptDialogEnd", "Private");
+        //CecilImporter.InjectMethodIntoType("LootList", "OnItemAcceptDialogEnd", "Private");
     }
 
-    private void OnItemAcceptDialogEnd(UIMessageBox.Result result, UIMessageBox sender)
+    /*private void OnItemAcceptDialogEnd(UIMessageBox.Result result, UIMessageBox sender)
     {
         sender.OnDialogEnd = (UIMessageBox.OnEndDialog)System.Delegate.Remove(sender.OnDialogEnd, new UIMessageBox.OnEndDialog(this.OnItemAcceptDialogEnd));
         if (result == UIMessageBox.Result.AFFIRMATIVE)
         {
             Console.AddMessage("You accepted... some item!");
         }
-    }
+    }*/
 
     public object[] EvaluateNew()
     {
@@ -69,23 +69,16 @@ public class Mod_LootShuffler_LootList : LootList
 
                 if (num2 < num && !flag)
                 {
+                    /*
                     if (!(this.items[i].Item == null) && !(this.items[i].Item is global::LootList))
                     {
-                        /*UIWindowManager.ShowMessageBox(UIMessageBox.ButtonStyle.YESNO, "Accept Item?", this.items[i].Item.name).OnDialogEnd = delegate(UIMessageBox.Result result, UIMessageBox boxsend)
-                        {
-                            if (result == UIMessageBox.Result.AFFIRMATIVE)
-                            {
-                                Scripts.GiveItem(this.items[i].Item.name, 1);
-                                flag = true;
-                            }
-                        };*/
                         //UIMessageBox msgBox = UIWindowManager.ShowMessageBox(UIMessageBox.ButtonStyle.YESNO, "Accept Item?", this.items[i].Item.name);
                         //msgBox.OnDialogEnd = (UIMessageBox.OnEndDialog)System.Delegate.Combine(msgBox.OnDialogEnd, new UIMessageBox.OnEndDialog(this.OnItemAcceptDialogEnd));
                         //this.QuitButton.onClick = (UIEventListener.VoidDelegate)Delegate.Combine(this.QuitButton.onClick, new UIEventListener.VoidDelegate(this.OnQuitClicked));
                     }
-
-                    //flag2 = true; //select this high quality item
-                    //flag = true; //you don't get any other high quality items
+                     */
+                    flag2 = true; //select this high quality item
+                    flag = true; //you don't get any other high quality items
                 }
             }
 
